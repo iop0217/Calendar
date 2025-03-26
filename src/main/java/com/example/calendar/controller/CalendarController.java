@@ -36,8 +36,8 @@ public class CalendarController {
     // 일정 수정
     @PutMapping("/{id}")
     public Calendar setSchedule(
-            @PathVariable String id, @RequestParam String password, @RequestParam String title, @RequestParam String author) {
-        return calendarService.setSchedule(id, password, title, author);
+            @PathVariable String id, @RequestBody Calendar newSchedule) {
+        return calendarService.setSchedule(id, newSchedule);
     }
 
     // 일정 삭제

@@ -37,15 +37,15 @@ public class CalendarService {
     }
 
     // 일정 수정
-    public Calendar setSchedule(String id, String password, String title, String author) {
+    public Calendar setSchedule(String id, Calendar newSchedule) {
         Calendar schedule = getScheduleById(id);
 
-        if (schedule == null || !schedule.getPassword().equals(password)) {
+        if (schedule == null || !schedule.getPassword().equals(newSchedule.getPassword())) {
             return null;
         }
 
-        schedule.setTitle(title);
-        schedule.setAuthor(author);
+        schedule.setTitle(newSchedule.getTitle());
+        schedule.setAuthor(newSchedule.getAuthor());
         schedule.setUpdatedAt(LocalDateTime.now());
 
         return schedule;
