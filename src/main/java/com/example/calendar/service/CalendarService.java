@@ -3,6 +3,7 @@ package com.example.calendar.service;
 import com.example.calendar.model.Calendar;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,5 +34,32 @@ public class CalendarService {
             }
         }
         return null;
+    }
+
+    // 일정 수정
+    public Calendar setSchedule(String id, String password, String title, String author) {
+        Calendar schedule = getScheduleById(id);
+
+        if (schedule == null || !schedule.getPassword().equals(password)) {
+            return null;
+        }
+
+        schedule.setTitle(title);
+        schedule.setAuthor(author);
+        schedule.setUpdatedAt(LocalDateTime.now());
+
+        return schedule;
+    }
+
+    // 일정 삭제
+    public Calendar deleteSchedule(String id, String password) {
+        Calendar schedule = getScheduleById(id);
+
+        if (schedule == null || !schedule.getPassword().equals(password)) {
+            return null;
+        }
+
+        schedules.remove(schedule);
+        return schedule;
     }
 }

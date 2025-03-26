@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/calender")
+@RequestMapping("/calendar")
 public class CalendarController {
     @Autowired
     private CalendarService calendarService;
@@ -31,5 +31,18 @@ public class CalendarController {
     @GetMapping("/{id}")
     public Calendar getScheduleById(@PathVariable String id) {
         return calendarService.getScheduleById(id);
+    }
+
+    // 일정 수정
+    @PutMapping("/{id}")
+    public Calendar setSchedule(
+            @PathVariable String id, @RequestParam String password, @RequestParam String title, @RequestParam String author) {
+        return calendarService.setSchedule(id, password, title, author);
+    }
+
+    // 일정 삭제
+    @DeleteMapping("/{id}")
+    public Calendar deleteSchedule(@PathVariable String id, @RequestParam String password) {
+        return calendarService.deleteSchedule(id, password);
     }
 }
